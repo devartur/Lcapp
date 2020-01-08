@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { AllQuestions } from "src/app/all-question/model/AllQuestions";
 import { ApiService } from "src/app/shared/api.service";
 
+
+
 ///
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -15,6 +17,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AllQuestionComponent implements OnInit {
     allQuestions : AllQuestions[] = [];
+   // public isCollapsed = false;
+    public isCollapsed: boolean [] = [];
+public isCollapsedSecondLevel: boolean [] = [];
+
   
 constructor(private apiService : ApiService) { }
 
@@ -37,7 +43,6 @@ constructor(private apiService : ApiService) { }
       );
   }
 }
-
 
 
 

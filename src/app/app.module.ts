@@ -14,6 +14,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule } from '@angular/common/http';
 import { AllQuestionsFilterPipe } from './shared/all-questions-filter.pipe';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 //import { Component, OnInit, ViewEncapsulation, NgZone, enableProdMode } from '@angular/core'; 
 
 //enableProdMode();
@@ -42,7 +45,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   
