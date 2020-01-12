@@ -1,94 +1,116 @@
 <div class="container">
-  <!-- Note menu -->
-  <div class="row" style="margin-top:12px;">
-    <div class="col-md-8">
-      <input type="text"
-             class="form-control"
-             style="width: 100%;"
-             placeholder="Search notes...">
-    </div>
-    <div class="col-md-4">
-      <button type="buton"
-              class="btn btn-info pull-right"
-              style="margin-left:12px;"><i class="fa fa-plus"></i> Moja karta
-      </button>
-      <button type="button"
-              class="btn btn-warning pull-right"
-              style="margin-left:12px;"><i class="fa fa-plus"></i> Do zmiany lub usuń
-      </button>
-    </div>
+	<!-- Note menu -->
+	<div class="row" style="margin-top:12px;">
+		<div class="col-md-8">
+			<input type="text" class="form-control" style="width: 100%;" placeholder="Search notes...">
+		</div>
+		<div class="col-md-4">
+			<button type="buton" class="btn btn-info pull-right" style="margin-left:12px;"><i class="fa fa-plus"></i>
+				Moja karta
+			</button>
+			<button type="button" class="btn btn-warning pull-right" style="margin-left:12px;"><i
+					class="fa fa-plus"></i> Do zmiany lub usuń
+			</button>
+		</div>
 
-  </div>
-  
-  <!-- Note content -->
-  <div class="row" style="margin-top: 28px;">
-    <!-- Notebooks Menu -->
-    <div class="col-md-3">
-      <br>
-      <div class="list-group list-group-flush">
-
-			<p>
-			<button type="button" class="list-group-item list-group-item-action" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-   <i class="fa fa-book"></i>&nbsp;All
-  </button>
-</p>      
-
-		<!-- Notebook List -->
-		
-	<p>
-	<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'firstLevel': 'firstLevel'; let i= index" class="list-group-item list-group-item-action">
-        
-			<button type="button" class="list-group-item list-group-item-action" (click)="isCollapsed[i] = !isCollapsed[i]"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-    <i class="fa fa-book"></i>&nbsp;{{oneQuestion.firstLevel}}
-  </button>
-  <div id="collapseExample" [ngbCollapse]="!isCollapsed[i]"> 
- 
-    
-      <p>
-<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'secondLevel':oneQuestion.firstLevel; let i= index" class="list-group-item list-group-item-action">
-			<button type="button" class="list-group-item list-group-item-action" (click)="isCollapsedSecondLevel[i] = !isCollapsedSecondLevel[i]"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-    <i class="fa fa-book"></i>{{oneQuestion.secondLevel}}
-  </button>
-  <div id="collapseExample" [ngbCollapse]="!isCollapsedSecondLevel[i]"> 
-  <div class="fa fa-book">
-    
-      {{oneQuestion.firstLevel}}
-    
-  </div>
-</div>
-</a>	
-</p> 
-
-    
-  
-</div>
-  
-  
-    </a>
-	
-</p> 
-
-     
-	  </div>
 	</div>
 
-	
-	    <!-- Notes Panel -->
-    <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- Message if there are no notes -->
-         
-        </div>
-      </div>
-      <div class="row">
-        <!-- Note list -->
-		
-		 </div>
-    </div>
-  </div>
-</div>
+	<!-- Note content -->
+	<div class="row" style="margin-top: 28px;">
+		<!-- Notebooks Menu -->
+		<div class="col-md-3">
 
+			<div class="list-group list-group-flush">
+
+				<p>
+					<button type="button" class="list-group-item list-group-item-action">
+						<i class="fa fa-book"></i>&nbsp;All
+					</button>
+				</p>
+
+				<!-- AllQuestions List -->
+				<!-- First level loop-->
+				<p>
+					<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'firstLevel': 'firstLevel'"
+						class="list-group-item list-group-item-action">
+
+						<button type="button" class="list-group-item list-group-item-action"
+							(click)="isCollapsed[oneQuestion.id] = !isCollapsed[oneQuestion.id]"
+							[attr.aria-expanded]="!isCollapsed" aria-controls="collapseFirst">
+							<i class="fa fa-book"></i>&nbsp;{{oneQuestion.firstLevel}}
+						</button>
+						<div id="collapseFirst" [ngbCollapse]="!isCollapsed[oneQuestion.id]">
+							<!-- Second level loop-->
+							<p>
+								<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'secondLevel':oneQuestion.firstLevel"
+									class="list-group-item list-group-item-action">
+									<button type="button" class="list-group-item list-group-item-action"
+										(click)="isCollapsed[oneQuestion.id + numbersAllQuestions] = !isCollapsed[oneQuestion.id + numbersAllQuestions]"
+										[attr.aria-expanded]="!isCollapsed[oneQuestion.id + numbersAllQuestions]"
+										aria-controls="collapseSecond">
+										<i class="fa fa-book"></i>{{oneQuestion.secondLevel}}
+									</button>
+									<div id="collapseSecond"
+										[ngbCollapse]="!isCollapsed[oneQuestion.id + numbersAllQuestions]">
+										<div>
+											<!-- third level loop-->
+											<p>
+												<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'thirdLevel':oneQuestion.firstLevel:oneQuestion.secondLevel"
+													class="list-group-item list-group-item-action">
+													<button type="button" class="list-group-item list-group-item-action"
+														(click)="isCollapsed[oneQuestion.id + numbersAllQuestions * 2 ] = !isCollapsed[oneQuestion.id + numbersAllQuestions * 2]"
+														[attr.aria-expanded]="!isCollapsed[oneQuestion.id+ numbersAllQuestions * 2 ]"
+														aria-controls="collapseThird">
+														<i class="fa fa-book"></i>{{oneQuestion.thirdLevel}}
+													</button>
+													<div id="collapseThird"
+														[ngbCollapse]="!isCollapsed[oneQuestion.id + numbersAllQuestions * 2]">
+														
+															<!-- fourth loop -->
+															<p>
+																<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'fourthLevel':oneQuestion.firstLevel:oneQuestion.secondLevel:oneQuestion.thirdLevel"
+																class="list-group-item list-group-item-action">
+																<a *ngIf= "oneQuestion.fourthLevel != null">
+																	<button type="button"
+																		class="list-group-item list-group-item-action"
+								
+																		aria-controls="collapseFourth">
+																		
+																		<i class="fa fa-book"></i>{{oneQuestion.fourthLevel}}
+																	
+																	</button>
+																</a>
+																</a>
+															</p>
+														
+													</div>
+												</a>
+											</p>
+										</div>
+									</div>
+								</a>
+							</p>
+						</div>
+					</a>
+				</p>
+
+
+			</div>
+		</div>
+
+
+		<!-- Notes Panel -->
+		<div class="col-md-9">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Message if there are no notes -->
+
+				</div>
+			</div>
+			<div class="row">
+				<!-- Note list -->
+
+			</div>
+		</div>
+	</div>
+</div>

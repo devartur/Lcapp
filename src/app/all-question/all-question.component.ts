@@ -17,15 +17,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AllQuestionComponent implements OnInit {
     allQuestions : AllQuestions[] = [];
-   // public isCollapsed = false;
     public isCollapsed: boolean [] = [];
-public isCollapsedSecondLevel: boolean [] = [];
+    numbersAllQuestions : number;
+    
 
   
 constructor(private apiService : ApiService) { }
 
   ngOnInit() {
       this.getAllQuestions();
+     
   }
   
   
@@ -36,6 +37,8 @@ constructor(private apiService : ApiService) { }
        
           
         this.allQuestions = res;  
+        this.numbersAllQuestions = this.allQuestions.length+1;
+        console.log(this.numbersAllQuestions);
       },
       err => {
           alert("Błąd podczas odbierania danych.")
