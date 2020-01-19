@@ -21,28 +21,31 @@
 		<div class="col-md-3">
 
 			<div class="list-group list-group-flush">
+				<!-- AllQuestions List -->
 
+				<!-- All Questions, no filter -->
 				<p>
 					<button type="button" class="list-group-item list-group-item-action">
 						<i class="fa fa-book"></i>&nbsp;All
 					</button>
 				</p>
 
-				<!-- AllQuestions List -->
+				
 				<!-- First level loop-->
 				<p>
-					<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'firstLevel': 'firstLevel'"
+					<a *ngFor="let oneQuestion of allQuestionsMenu | allQuestionsFilter: 'firstLevel': 'firstLevel'"
 						class="list-group-item list-group-item-action">
 
 						<button type="button" class="list-group-item list-group-item-action"
 							(click)="isCollapsed[oneQuestion.id] = !isCollapsed[oneQuestion.id]"
+							(click)="selectQuestion(oneQuestion.firstLevel, 'firstLevel')"
 							[attr.aria-expanded]="!isCollapsed" aria-controls="collapseFirst">
 							<i class="fa fa-book"></i>&nbsp;{{oneQuestion.firstLevel}}
 						</button>
 						<div id="collapseFirst" [ngbCollapse]="!isCollapsed[oneQuestion.id]">
 							<!-- Second level loop-->
 							<p>
-								<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'secondLevel':oneQuestion.firstLevel"
+								<a *ngFor="let oneQuestion of allQuestionsMenu | allQuestionsFilter: 'secondLevel':oneQuestion.firstLevel"
 									class="list-group-item list-group-item-action">
 									<button type="button" class="list-group-item list-group-item-action"
 										(click)="isCollapsed[oneQuestion.id + numbersAllQuestions] = !isCollapsed[oneQuestion.id + numbersAllQuestions]"
@@ -55,7 +58,7 @@
 										<div>
 											<!-- third level loop-->
 											<p>
-												<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'thirdLevel':oneQuestion.firstLevel:oneQuestion.secondLevel"
+												<a *ngFor="let oneQuestion of allQuestionsMenu | allQuestionsFilter: 'thirdLevel':oneQuestion.firstLevel:oneQuestion.secondLevel"
 													class="list-group-item list-group-item-action">
 													<button type="button" class="list-group-item list-group-item-action"
 														(click)="isCollapsed[oneQuestion.id + numbersAllQuestions * 2 ] = !isCollapsed[oneQuestion.id + numbersAllQuestions * 2]"
@@ -65,24 +68,24 @@
 													</button>
 													<div id="collapseThird"
 														[ngbCollapse]="!isCollapsed[oneQuestion.id + numbersAllQuestions * 2]">
-														
-															<!-- fourth loop -->
-															<p>
-																<a *ngFor="let oneQuestion of allQuestions | allQuestionsFilter: 'fourthLevel':oneQuestion.firstLevel:oneQuestion.secondLevel:oneQuestion.thirdLevel"
+
+														<!-- fourth loop -->
+														<p>
+															<a *ngFor="let oneQuestion of allQuestionsMenu | allQuestionsFilter: 'fourthLevel':oneQuestion.firstLevel:oneQuestion.secondLevel:oneQuestion.thirdLevel"
 																class="list-group-item list-group-item-action">
-																<a *ngIf= "oneQuestion.fourthLevel != null">
+																<a *ngIf="oneQuestion.fourthLevel != null">
 																	<button type="button"
 																		class="list-group-item list-group-item-action"
-								
 																		aria-controls="collapseFourth">
-																		
-																		<i class="fa fa-book"></i>{{oneQuestion.fourthLevel}}
-																	
+
+																		<i
+																			class="fa fa-book"></i>{{oneQuestion.fourthLevel}}
+
 																	</button>
 																</a>
-																</a>
-															</p>
-														
+															</a>
+														</p>
+
 													</div>
 												</a>
 											</p>
@@ -99,17 +102,38 @@
 		</div>
 
 
-		<!-- Notes Panel -->
+		<!-- Questions Panel -->
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-12">
-					<!-- Message if there are no notes -->
-
+					<!-- Message if there are no questions -->
+					
 				</div>
 			</div>
 			<div class="row">
 				<!-- Note list -->
+			
+		
 
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Pytanie</th>
+	<th scope="col">Data dodania</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let question of selectedQuestionList; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{ question.question }}
+    </td>
+    <td>{{ question.creationTime}}</td>
+  </tr>
+  </tbody>
+</table>
+				
 			</div>
 		</div>
 	</div>
