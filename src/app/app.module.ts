@@ -16,6 +16,12 @@ import {HttpClientModule } from '@angular/common/http';
 import { AllQuestionsFilterPipe } from './shared/all-questions-filter.pipe';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AnswerComponent } from './answer/answer.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 
 //import { Component, OnInit, ViewEncapsulation, NgZone, enableProdMode } from '@angular/core'; 
 
@@ -38,7 +44,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     FeedbackComponent,
     HomeComponent,
-    AllQuestionsFilterPipe
+    AllQuestionsFilterPipe,
+    AnswerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +53,15 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    NoopAnimationsModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [],
   
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AnswerComponent]
+  
 })
 export class AppModule { }

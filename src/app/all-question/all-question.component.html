@@ -38,7 +38,7 @@
 
 						<button type="button" class="list-group-item list-group-item-action"
 							(click)="isCollapsed[oneQuestion.id] = !isCollapsed[oneQuestion.id]"
-							(click)="selectQuestion(oneQuestion.firstLevel, 'firstLevel')"
+							(click)="selectQuestion(oneQuestion.id, 'firstLevel')"
 							[attr.aria-expanded]="!isCollapsed" aria-controls="collapseFirst">
 							<i class="fa fa-book"></i>&nbsp;{{oneQuestion.firstLevel}}
 						</button>
@@ -49,6 +49,7 @@
 									class="list-group-item list-group-item-action">
 									<button type="button" class="list-group-item list-group-item-action"
 										(click)="isCollapsed[oneQuestion.id + numbersAllQuestions] = !isCollapsed[oneQuestion.id + numbersAllQuestions]"
+										(click)="selectQuestion(oneQuestion.id, 'secondLevel')"
 										[attr.aria-expanded]="!isCollapsed[oneQuestion.id + numbersAllQuestions]"
 										aria-controls="collapseSecond">
 										<i class="fa fa-book"></i>{{oneQuestion.secondLevel}}
@@ -62,6 +63,7 @@
 													class="list-group-item list-group-item-action">
 													<button type="button" class="list-group-item list-group-item-action"
 														(click)="isCollapsed[oneQuestion.id + numbersAllQuestions * 2 ] = !isCollapsed[oneQuestion.id + numbersAllQuestions * 2]"
+														(click)="selectQuestion(oneQuestion.id, 'thirdLevel')"
 														[attr.aria-expanded]="!isCollapsed[oneQuestion.id+ numbersAllQuestions * 2 ]"
 														aria-controls="collapseThird">
 														<i class="fa fa-book"></i>{{oneQuestion.thirdLevel}}
@@ -76,6 +78,7 @@
 																<a *ngIf="oneQuestion.fourthLevel != null">
 																	<button type="button"
 																		class="list-group-item list-group-item-action"
+																		(click)="selectQuestion(oneQuestion.id, 'fourthLevel')"
 																		aria-controls="collapseFourth">
 
 																		<i
@@ -121,6 +124,7 @@
     <th scope="col">#</th>
     <th scope="col">Pytanie</th>
 	<th scope="col">Data dodania</th>
+	<th scope="col">Odpowiedź</th>
   </tr>
   </thead>
   <tbody>
@@ -129,7 +133,18 @@
     <td>
       {{ question.question }}
     </td>
-    <td>{{ question.creationTime}}</td>
+	<td>{{ question.creationTime}}</td>
+	<td>
+		<button type="button"
+			class="btn btn-link"
+			(click)="showAnswer(question)">
+			<i class="	fa fa-info-circle  fa-lg"></i>
+		</button>
+
+		
+	
+	
+	</td>
   </tr>
   </tbody>
 </table>
@@ -138,3 +153,5 @@
 		</div>
 	</div>
 </div>
+
+								

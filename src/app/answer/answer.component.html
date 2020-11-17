@@ -1,0 +1,45 @@
+
+  <p><em>Pytanie: &nbsp; </em>{{oneQuestion.question}}</p>
+  <hr>
+  <mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <p><em>Odopwiedź podstawowa</em></p>
+</mat-panel-title>
+</mat-expansion-panel-header>
+<p>{{oneQuestion.basicAnswer}}</p>
+</mat-expansion-panel>
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <p><em>Odpowiedź rozszerzona</em></p>
+</mat-panel-title>
+</mat-expansion-panel-header>
+<p>{{oneQuestion.intermediateAnswer}}</p>
+</mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <p><em>Odpowiedź zaawansowana</em></p>
+</mat-panel-title>
+</mat-expansion-panel-header>
+<p>{{oneQuestion.advancedAnswer}}</p>
+</mat-expansion-panel>
+
+</mat-accordion>
+
+
+
+
+
+
+
+
+
+  

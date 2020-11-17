@@ -4,6 +4,8 @@ import { AllQuestionsMenu } from "src/app/all-question/model/AllQuestionsMenu";
 import { Question } from "src/app/all-question/model/Question";
 import { ApiService } from "src/app/shared/api.service";
 import { Pipe, PipeTransform } from '@angular/core';
+import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
+import { AnswerComponent } from '../answer/answer.component';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class AllQuestionComponent implements OnInit {
     
 
   
-constructor(private apiService : ApiService) { }
+constructor(private apiService : ApiService, private dialog : MatDialog) { }
 
   ngOnInit() {
       this.getAllQuestionsMenu();
@@ -64,7 +66,16 @@ selectQuestion(firstLevel: string, level : string) {
   );
 }
 
+showAnswer(question: Question) {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false;
+  dialogConfig.data = question;
+ this.dialog.open(AnswerComponent,dialogConfig);
 }
+
+}
+
+
 
 
 
