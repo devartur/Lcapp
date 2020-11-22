@@ -20,6 +20,8 @@ import { AnswerComponent } from './answer/answer.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -32,6 +34,8 @@ const appRoutes: Routes = [
     { path: 'all-question', component: AllQuestionComponent },
     { path: 'my-question', component: MyQuestionComponent },
     { path: 'feedback', component: FeedbackComponent },
+    { path: 'registration', component: RegistrationComponent },
+    { path: 'login', component: LoginComponent },
     { path: '**', component: NotFoundComponent }
                            ];
 
@@ -45,7 +49,9 @@ const appRoutes: Routes = [
     FeedbackComponent,
     HomeComponent,
     AllQuestionsFilterPipe,
-    AnswerComponent
+    AnswerComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

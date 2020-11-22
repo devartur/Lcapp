@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-3"></div>
+        <div class="col-md-6">
+            <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && registerUser()" >
+                <!--User Name -->
+                <div class="form-group">
+                    <label for="userName">Nazwa użytkownika</label>
+                    <input type="text" id="userName" class="form-control" name="userName"
+                        placeholder="Podaj nazwę użytkownika" [(ngModel)]="model.userName" #userName="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required />
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && userName.invalid" class="invalid-input">
+                        <!-- individual validation errors -->
+                        <div *ngIf="userName.errors?.required">Pole jest wymagane</div>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" name="email" placeholder="Podaj adres email"
+                        [(ngModel)]="model.email" #email="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+                        <!-- individual validation errors -->
+                        <div *ngIf="email.errors?.required">Pole jest wymagane</div>
+                        <div *ngIf="email.errors?.email">Adres email jest błędny</div>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="newPassword">Hasło</label>
+                    <input type="password" id="newPassword" class="form-control" name="newPassword"
+                        placeholder="Podaj hasło min 6 - max 20 znaków" [(ngModel)]="model.newPassword" #newPassword="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && newPassword.invalid }" required minlength="6" required
+                        maxlength="20" />
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && newPassword.invalid" class="invalid-input">
+                        <!-- individual validation errors -->
+                        <div *ngIf="newPassword.errors?.required">Pole jest wymagane</div>
+                        <div *ngIf="newPassword.errors?.minlength">Min. 6 znaków</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-info pull-right">
+                    <i class="fa fa-user-plus"></i>
+                    <span> Załóż konto</span>
+                </button>
+            </form>
+        </div>
+        <div class="offset-3"></div>
+    </div>
+</div>

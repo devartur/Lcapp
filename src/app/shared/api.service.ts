@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { AllQuestionsMenu } from "src/app/all-question/model/AllQuestionsMenu";
 import { Question } from "src/app/all-question/model/Question";
 import {FeedbackViewModel} from "../feedback/feedback.component";
+import { RegistrationViewModel } from '../registration/registration.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ApiService {
     private ALL_QUESTIONS_URL = `${this.BASE_URL}/all-questions`;
     private SELECTED_QUESTIONS_URL = `${this.BASE_URL}/selected-questions/`;
     private SEND_FEEDBACK_URL = `${this.BASE_URL}/feedback`;
+    private ADD_NEW_USER_URL = `${this.BASE_URL}/user/register`;
     
   constructor(private http : HttpClient) { }
   
@@ -46,4 +48,8 @@ export class ApiService {
   postFeedback(feedback : FeedbackViewModel) : Observable<any>{
       return this.http.post(this.SEND_FEEDBACK_URL, feedback);
   }
+  registerUser(newUser : RegistrationViewModel) : Observable<any>{
+    newUser.newRepeatedPassword = newUser.newPassword;
+    return this.http.post(this.ADD_NEW_USER_URL, newUser);
+}
 }
