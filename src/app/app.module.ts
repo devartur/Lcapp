@@ -12,7 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule } from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AllQuestionsFilterPipe } from './shared/all-questions-filter.pipe';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +22,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { AuthenticationService } from "src/app/shared/api.authentication.service";
+import { JwtInterceptor } from 'src/app/shared/jwt.interceptor';
+import { AuthGuard } from 'src/app/shared/auth.guard';
+import { ErrorInterceptor } from 'src/app/shared/error.interceptor';
+import { LogoutComponent } from './logout/logout.component';
+
+
 
 
 
@@ -31,11 +38,12 @@ import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
-    { path: 'all-question', component: AllQuestionComponent },
+    { path: 'all-question', component: AllQuestionComponent,canActivate: [AuthGuard] },
     { path: 'my-question', component: MyQuestionComponent },
     { path: 'feedback', component: FeedbackComponent },
     { path: 'registration', component: RegistrationComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'logout', component: LogoutComponent },
     { path: '**', component: NotFoundComponent }
                            ];
 
@@ -51,7 +59,8 @@ const appRoutes: Routes = [
     AllQuestionsFilterPipe,
     AnswerComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +73,12 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   
   bootstrap: [AppComponent],
   entryComponents:[AnswerComponent]

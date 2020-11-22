@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from "src/app/shared/api.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -8,14 +9,15 @@ import { ApiService } from "src/app/shared/api.service";
 })
 export class RegistrationComponent implements OnInit {
 
-
   model: RegistrationViewModel = {
     userName: '',
     email: '',
     newPassword: '',
     newRepeatedPassword: ''
   };
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,11 +26,10 @@ export class RegistrationComponent implements OnInit {
     this.apiService.registerUser(this.model).subscribe(
       res => {
         alert('Użytkownik: ' + '\n' + this.model.userName + '\n' + 'Została zarejestrowany.')
-        location.reload();
+        this.router.navigate(['/login']);
       },
       err => {
         alert("Błąd podczas wysyłania wiadomości")
-        console.log(err);
       }
     )
   }
