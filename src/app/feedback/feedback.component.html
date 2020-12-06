@@ -37,13 +37,13 @@
           <div *ngIf="f.submitted && email.invalid" class="invalid-input">
             <!-- individual validation errors -->
             <div *ngIf="email.errors?.required">Pole jest wymagane</div>
-            <div *ngIf="email.errors?.email">Adres email jest b³êdny</div>
+            <div *ngIf="email.errors?.email">Adres email jest bÅ‚Ä™dny</div>
           </div>
         </div>
 
         <!-- Feedback -->
         <div class="form-group">
-          <label for="feedback">Wiadomoœæ</label>
+          <label for="feedback">WiadomoÅ›Ä‡</label>
           <textarea
             id="feedback"
             class="form-control"
@@ -59,13 +59,13 @@
           <div *ngIf="f.submitted && feedback.invalid" class="invalid-input">
             <!-- individual validation errors -->
             <div *ngIf="feedback.errors?.required">Pole jest wymagane</div>
-            <div *ngIf="feedback.errors?.minlength">Min. 10 znaków</div>
+            <div *ngIf="feedback.errors?.minlength">Min. 10 znakÃ³w</div>
           </div>
         </div>
 
         <button type="submit" class="btn btn-info pull-right">
           <i class="fa fa-envelope-o"></i>
-          <span> Wyœlij</span>
+          <span> WyÅ›lij</span>
         </button>
       </form>
     </div>

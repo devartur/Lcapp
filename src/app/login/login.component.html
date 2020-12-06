@@ -2,40 +2,22 @@
     <div class="row">
         <div class="offset-3"></div>
         <div class="col-md-6">
-            <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && loginUser()" >
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" class="form-control" name="email" placeholder="Podaj adres email"
-                        [(ngModel)]="model.email" #email="ngModel"
-                        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
-                    <!-- input validation group -->
-                    <div *ngIf="f.submitted && email.invalid" class="invalid-input">
-                        <!-- individual validation errors -->
-                        <div *ngIf="email.errors?.required">Pole jest wymagane</div>
-                        <div *ngIf="email.errors?.email">Adres email jest błędny</div>
-                    </div>
-                </div>
-                <!-- Password -->
-                <div class="form-group">
-                    <label for="newPassword">Hasło</label>
-                    <input type="password" id="newPassword" class="form-control" name="newPassword"
-                        placeholder="Podaj hasło" [(ngModel)]="model.newPassword" #newPassword="ngModel"
-                        [ngClass]="{ 'is-invalid': f.submitted && newPassword.invalid }" required minlength="6" required
-                        maxlength="20" />
-                    <!-- input validation group -->
-                    <div *ngIf="f.submitted && newPassword.invalid" class="invalid-input">
-                        <!-- individual validation errors -->
-                        <div *ngIf="newPassword.errors?.required">Pole jest wymagane</div>
-                        <div *ngIf="newPassword.errors?.minlength">Min. 6 znaków</div>
-                    </div>
-                </div>
+<p></p>
+            <ng-container *ngIf="!isLogged">
+            <button (click)="login()" class="btn btn-info ">
+                <i class="fa fa-sign-in"></i>
+                <span> Zaloguj</span>
+            </button>
 
-                <button type="submit" class="btn btn-info pull-right">
-                    <i class="fa fa-sign-in"></i>
-                    <span> Zaloguj</span>
-                </button>
-            </form>
+        </ng-container>
+        <ng-container *ngIf="isLogged">
+            <button (click)="logout()" class="btn btn-info ">
+                <i class="fa fa-sign-in"></i>
+                <span> Wyloguj</span>
+            </button>
+
+        </ng-container>
+
         </div>
         <div class="offset-3"></div>
     </div>

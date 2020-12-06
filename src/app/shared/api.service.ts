@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { AllQuestionsMenu } from "src/app/all-question/model/AllQuestionsMenu";
 import { Question } from "src/app/all-question/model/Question";
 import {FeedbackViewModel} from "../feedback/feedback.component";
-import { RegistrationViewModel } from '../registration/registration.component';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -47,8 +46,4 @@ export class ApiService {
   postFeedback(feedback : FeedbackViewModel) : Observable<any>{
       return this.http.post(this.SEND_FEEDBACK_URL, feedback);
   }
-  registerUser(newUser : RegistrationViewModel) : Observable<any>{
-    newUser.newRepeatedPassword = newUser.newPassword;
-    return this.http.post(this.ADD_NEW_USER_URL, newUser);
-}
 }

@@ -20,13 +20,10 @@ import { AnswerComponent } from './answer/answer.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import { AuthenticationService } from "src/app/shared/api.authentication.service";
-import { JwtInterceptor } from 'src/app/shared/jwt.interceptor';
 import { AuthGuard } from 'src/app/shared/auth.guard';
-import { ErrorInterceptor } from 'src/app/shared/error.interceptor';
-import { LogoutComponent } from './logout/logout.component';
+import { CallbackComponent } from './callback/callback.component';
+import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
 
 
 
@@ -38,12 +35,11 @@ import { LogoutComponent } from './logout/logout.component';
 
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
-    { path: 'all-question', component: AllQuestionComponent,canActivate: [AuthGuard] },
-    { path: 'my-question', component: MyQuestionComponent },
-    { path: 'feedback', component: FeedbackComponent },
-    { path: 'registration', component: RegistrationComponent },
+    { path: 'all-question', component: AllQuestionComponent,canActivate: [AuthGuard]},
+    { path: 'my-question', component: MyQuestionComponent,canActivate: [AuthGuard] },
+    { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
-    { path: 'logout', component: LogoutComponent },
+    { path: 'callback', component: CallbackComponent},
     { path: '**', component: NotFoundComponent }
                            ];
 
@@ -58,9 +54,8 @@ const appRoutes: Routes = [
     HomeComponent,
     AllQuestionsFilterPipe,
     AnswerComponent,
-    RegistrationComponent,
     LoginComponent,
-    LogoutComponent
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -75,9 +70,9 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthGuard,
-    AuthenticationService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {   provide: HTTP_INTERCEPTORS,
+      useClass: AuthHeaderInterceptor,
+      multi: true }
   ],
   
   bootstrap: [AppComponent],

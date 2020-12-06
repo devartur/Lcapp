@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from "src/app/shared/api.authentication.service";
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { SecurityService } from '../shared/security.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,49 +8,24 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loading = false;
-  submitted = false;
-  returnUrl: string;
 
-  model: LoginViewModel = {
-    email: '',
-    password: ''
-  };
+  isLogged: boolean = false;
 
-  constructor(
-      private authenticationService: AuthenticationService,
-      private route: ActivatedRoute,
-      private router: Router
-    ) {}
+  constructor(private securityService: SecurityService) { }
 
-  ngOnInit() {
-
-      // reset login status
-      this.authenticationService.logout();
-
-      // get return url from route parameters or default to '/'
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  ngOnInit(): void {
+    this.isLogged = this.securityService.isLoggedIn();
   }
 
-  loginUser() {
-      this.submitted = true;
+  login() {
+    this.securityService.login();
+  }
 
-      this.loading = true;
-      this.authenticationService.login(this.model)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  this.router.navigate([this.returnUrl]);
-              },
-              error => {
-                  console.log(error);
-                  this.loading = false;
-              });
+  logout()
+  {
+    this.securityService.logout() .subscribe(() => {
+      this.securityService.removeToken();
+      this.isLogged = this.securityService.isLoggedIn();
+    });
   }
 }
-
-export interface LoginViewModel {
-  email: string;
-  password: string;
-}
-
