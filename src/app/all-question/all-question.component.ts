@@ -6,6 +6,7 @@ import { ApiService } from "src/app/shared/api.service";
 import { Pipe, PipeTransform } from '@angular/core';
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { AnswerComponent } from '../answer/answer.component';
+import { UserQuestionsComponent } from '../user-questions/user-questions.component';
 
 
 @Component({
@@ -20,10 +21,8 @@ export class AllQuestionComponent implements OnInit {
 
     allQuestions : Question[] = [];
     selectedQuestionList : Question[] = [];
-    selectedQuestions : Question; // wyświetliś na oknie które pytania zostły aktualnie wybrane
-    
-
   
+
 constructor(private apiService : ApiService, private dialog : MatDialog) { }
 
   ngOnInit() {
@@ -31,7 +30,8 @@ constructor(private apiService : ApiService, private dialog : MatDialog) { }
       this.getAllQuestions();
   }
   
-  
+
+
   public getAllQuestionsMenu(){
       this.apiService.getAllQuestionsMenu().subscribe(
       res => { 
@@ -43,6 +43,7 @@ constructor(private apiService : ApiService, private dialog : MatDialog) { }
       }        
       );
   }
+
 
   public getAllQuestions(){
     this.apiService.getAllQuestions().subscribe(
@@ -71,6 +72,14 @@ showAnswer(question: Question) {
   dialogConfig.disableClose = false;
   dialogConfig.data = question;
  this.dialog.open(AnswerComponent,dialogConfig);
+}
+
+
+addQuestionsToUserQuestions(selectedQuestionList : Question[]){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false;
+  dialogConfig.data = selectedQuestionList;
+ this.dialog.open(UserQuestionsComponent,dialogConfig);
 }
 
 }

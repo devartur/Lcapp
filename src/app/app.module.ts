@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { AllQuestionComponent } from './all-question/all-question.component';
-import { MyQuestionComponent } from './my-question/my-question.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -24,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from 'src/app/shared/auth.guard';
 import { CallbackComponent } from './callback/callback.component';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
+import { UserQuestionsComponent } from './user-questions/user-questions.component';
 
 
 
@@ -36,7 +36,7 @@ import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'all-question', component: AllQuestionComponent,canActivate: [AuthGuard]},
-    { path: 'my-question', component: MyQuestionComponent,canActivate: [AuthGuard] },
+    { path: 'user-questions', component: UserQuestionsComponent,canActivate: [AuthGuard] },
     { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
     { path: 'callback', component: CallbackComponent},
@@ -48,14 +48,14 @@ const appRoutes: Routes = [
     AppComponent,
     NavigationComponent,
     AllQuestionComponent,
-    MyQuestionComponent,
     NotFoundComponent,
     FeedbackComponent,
     HomeComponent,
     AllQuestionsFilterPipe,
     AnswerComponent,
     LoginComponent,
-    CallbackComponent
+    CallbackComponent,
+    UserQuestionsComponent
   ],
   imports: [
     BrowserModule,

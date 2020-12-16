@@ -1,23 +1,13 @@
 <div class="container">
-	<!-- Note menu -->
-	<div class="row" style="margin-top:12px;">
-		<div class="col-md-8">
-			<input type="text" class="form-control" style="width: 100%;" placeholder="Search notes...">
-		</div>
-		<div class="col-md-4">
-			<button type="buton" class="btn btn-info pull-right" style="margin-left:12px;"><i class="fa fa-plus"></i>
-				Moja karta
-			</button>
-			<button type="button" class="btn btn-warning pull-right" style="margin-left:12px;"><i
-					class="fa fa-plus"></i> Do zmiany lub usuń
+	<div class="row text-center" style="margin-top:12px;">
+		<div class="col-md-12">
+			<button type="buton" class="btn btn-info default"  (click)="addQuestionsToUserQuestions(selectedQuestionList)">
+				<i class="fa fa-plus"></i>
+				Dodaj wybrane pytania do swojej listy
 			</button>
 		</div>
-
 	</div>
-
-	<!-- Note content -->
 	<div class="row" style="margin-top: 28px;">
-		<!-- Notebooks Menu -->
 		<div class="col-md-3">
 
 			<div class="list-group list-group-flush">

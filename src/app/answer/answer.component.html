@@ -9,7 +9,7 @@
   <p><em>Odopwiedź podstawowa</em></p>
 </mat-panel-title>
 </mat-expansion-panel-header>
-<p>{{oneQuestion.basicAnswer}}</p>
+<div [innerHTML]="basicAnswer"></div>
 </mat-expansion-panel>
 
 <mat-expansion-panel (opened)="panelOpenState = true"
@@ -19,8 +19,7 @@
   <p><em>Odpowiedź rozszerzona</em></p>
 </mat-panel-title>
 </mat-expansion-panel-header>
-<div [innerHTML]="oneQuestion.intermediateAnswer"></div>
-<p>{{oneQuestion.intermediateAnswer}}</p>
+<div [innerHTML]="intermediateAnswer"></div>
 </mat-expansion-panel>
 
   <mat-expansion-panel (opened)="panelOpenState = true"
@@ -30,7 +29,7 @@
   <p><em>Odpowiedź zaawansowana</em></p>
 </mat-panel-title>
 </mat-expansion-panel-header>
-<p>{{oneQuestion.advancedAnswer}}</p>
+<div [innerHTML]="advancedAnswer"></div>
 </mat-expansion-panel>
 
 </mat-accordion>

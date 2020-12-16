@@ -5,6 +5,7 @@ import { AllQuestionsMenu } from "src/app/all-question/model/AllQuestionsMenu";
 import { Question } from "src/app/all-question/model/Question";
 import {FeedbackViewModel} from "../feedback/feedback.component";
 import { map } from 'rxjs/operators';
+import { QuestionsList } from '../all-question/model/QuestionsList';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +28,6 @@ export class ApiService {
     .set('level', level);
     return  this.http.get<Question[]>(this.SELECTED_QUESTIONS_URL, {params});
   }
-
-  // getNotesByNotebook(notebookId: string): Observable<Note[]> {
-   // return this.http.get<Note[]>(this.NOTES_BY_NOTEBOOK_URL + notebookId);
- // }
-
   
   getAllQuestionsMenu() : Observable<AllQuestionsMenu[]>{
       return  this.http.get<AllQuestionsMenu[]>(this.ALL_QUESTIONS_MENU_URL);
@@ -46,4 +42,11 @@ export class ApiService {
   postFeedback(feedback : FeedbackViewModel) : Observable<any>{
       return this.http.post(this.SEND_FEEDBACK_URL, feedback);
   }
+
+  getUserQuestionsLists() : Observable<QuestionsList[]>{
+    return  this.http.get<QuestionsList[]>(this.ALL_QUESTIONS_MENU_URL);
+    
+}
+
+
 }
