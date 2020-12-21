@@ -36,7 +36,8 @@ export class UserQuestionsComponent implements OnInit {
       this.userQuestionsLists = res;  
     },
     err => {
-        alert("Błąd podczas odbierania danych.(uql_guql_1)")
+        alert("Błąd podczas odbierania danych.(uql_guql_1)");
+        console.log(err);
     }        
     );
 }

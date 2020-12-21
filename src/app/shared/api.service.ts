@@ -17,8 +17,8 @@ export class ApiService {
     private ALL_QUESTIONS_URL = `${this.BASE_URL}/all-questions`;
     private SELECTED_QUESTIONS_URL = `${this.BASE_URL}/selected-questions/`;
     private SEND_FEEDBACK_URL = `${this.BASE_URL}/feedback`;
-    private ADD_NEW_USER_URL = `${this.BASE_URL}/user/register`;
-    
+    private QUESTIONS_LISTS_URL = `${this.BASE_URL}/questions-lists`;
+
   constructor(private http : HttpClient) { }
   
 
@@ -44,7 +44,7 @@ export class ApiService {
   }
 
   getUserQuestionsLists() : Observable<QuestionsList[]>{
-    return  this.http.get<QuestionsList[]>(this.ALL_QUESTIONS_MENU_URL);
+    return  this.http.get<QuestionsList[]>(this.QUESTIONS_LISTS_URL);
     
 }
 

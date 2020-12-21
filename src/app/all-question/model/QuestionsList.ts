@@ -4,6 +4,8 @@ export interface QuestionsList{
     
     
     id: string;
+    name:string;
+    description: string;
     questions: Question[];
   
     creationTime: string;
