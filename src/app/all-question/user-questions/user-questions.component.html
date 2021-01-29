@@ -1,0 +1,23 @@
+<div class="container" *ngIf="!isQuestionListEmpty">
+  <label class="text-center">Wybierz listę do której dodać pytania</label>
+  <div class="text-center">
+    <mat-form-field appearance="fill">
+      <mat-select (selectionChange)="selectedValue($event)" [formControl]="questionsListControl" required >
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let questionsList of userQuestionsLists" [value]="questionsList">
+          {{ questionsList.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="questionsListControl.hasError('required')">Proszę wybierz listę</mat-error>
+    <!--  <mat-hint>{{questionsListControl.value?.description}}</mat-hint> -->
+    </mat-form-field>
+  </div>
+  <div class="description_text">{{questionsListControl.value?.description}}</div>
+  <p></p>
+  <div class="text-center">
+    <button type="buton" class="btn btn-info default" (click)="addQuestionsToQuestionsList()">
+      <i class="fa fa-plus"></i>
+      Dodaj pytania do wybranej listy
+    </button>
+  </div>
+</div>

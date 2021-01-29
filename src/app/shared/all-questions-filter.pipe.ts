@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AllQuestionsMenu } from "src/app/all-question/model/AllQuestionsMenu";
+import { AllQuestionsMenu } from "src/app/model/AllQuestionsMenu";
 
 import * as _ from 'lodash';
 //import 'rxjs/Rx';

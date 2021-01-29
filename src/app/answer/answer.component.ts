@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
-import { Question } from '../all-question/model/Question';
+import { Question } from '../model/Question';
 
 import { Inject } from "@angular/core";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";

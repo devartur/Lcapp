@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AllQuestionsMenu } from "src/app/all-question/model/AllQuestionsMenu";
-import { Question } from "src/app/all-question/model/Question";
+import { AllQuestionsMenu } from "src/app/model/AllQuestionsMenu";
+import { Question } from "src/app/model/Question";
 import { ApiService } from "src/app/shared/api.service";
 import { Pipe, PipeTransform } from '@angular/core';
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { AnswerComponent } from '../answer/answer.component';
-import { UserQuestionsComponent } from '../user-questions/user-questions.component';
+import { UserQuestionsComponent } from './user-questions/user-questions.component';
 
 
 @Component({
@@ -78,6 +78,7 @@ showAnswer(question: Question) {
 addQuestionsToUserQuestions(selectedQuestionList : Question[]){
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = false;
+ // dialogConfig.minHeight = 200;
   dialogConfig.data = selectedQuestionList;
  this.dialog.open(UserQuestionsComponent,dialogConfig);
 }
