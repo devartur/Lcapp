@@ -1,11 +1,40 @@
 <div class="container">
-    <label class="text-center">Wybierz listę do której dodać pytania</label>
-    
-    <div class="text-center">
+  <div class="row text-center" style="margin-top:12px;">
+    <div class="col-md-12">
       <button type="buton" class="btn btn-info default" (click)="addUserQuestionList()">
         <i class="fa fa-plus"></i>
         Dodaj nową listę
       </button>
     </div>
-  
   </div>
+  <p></p>
+
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Statystyki</th>
+          <th scope="col">Nazwa listy</th>
+          <th scope="col">Opis listy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userQuestionsList of allUserQuestionList; index as i"
+          (dblclick)="openUserQuestionsList(userQuestionsList)">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <button type="button" class="btn btn-link" (click)="openStatisticUserQuestionsList(userQuestionsList)">
+              <i class="	fa fa-info-circle  fa-lg"></i>
+            </button>
+          </td>
+          <td>
+            {{ userQuestionsList.name }}
+          </td>
+          <td>{{ userQuestionsList.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

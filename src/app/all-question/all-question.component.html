@@ -1,7 +1,8 @@
 <div class="container">
 	<div class="row text-center" style="margin-top:12px;">
 		<div class="col-md-12">
-			<button type="buton" class="btn btn-info default"  (click)="addQuestionsToUserQuestions(selectedQuestionList)">
+			<button type="buton" class="btn btn-info default"
+				(click)="addQuestionsToUserQuestions(selectedQuestionList)">
 				<i class="fa fa-plus"></i>
 				Dodaj wybrane pytania do swojej listy
 			</button>
@@ -20,7 +21,7 @@
 					</button>
 				</p>
 
-				
+
 				<!-- First level loop-->
 				<p>
 					<a *ngFor="let oneQuestion of allQuestionsMenu | allQuestionsFilter: 'firstLevel': 'firstLevel'"
@@ -28,8 +29,8 @@
 
 						<button type="button" class="list-group-item list-group-item-action"
 							(click)="isCollapsed[oneQuestion.id] = !isCollapsed[oneQuestion.id]"
-							(click)="selectQuestion(oneQuestion.id, 'firstLevel')"
-							[attr.aria-expanded]="!isCollapsed" aria-controls="collapseFirst">
+							(click)="selectQuestion(oneQuestion.id, 'firstLevel')" [attr.aria-expanded]="!isCollapsed"
+							aria-controls="collapseFirst">
 							<i class="fa fa-book"></i>&nbsp;{{oneQuestion.firstLevel}}
 						</button>
 						<div id="collapseFirst" [ngbCollapse]="!isCollapsed[oneQuestion.id]">
@@ -100,41 +101,37 @@
 			<div class="row">
 				<div class="col-md-12">
 					<!-- Message if there are no questions -->
-					
+
 				</div>
 			</div>
 			<div class="row">
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Pytanie</th>
-	<th scope="col">Data dodania</th>
-	<th scope="col">Odpowiedź</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let question of selectedQuestionList; index as i">
-    <th scope="row">{{ i + 1 }}</th>
-    <td>
-      {{ question.question }}
-    </td>
-	<td>{{ question.creationTime}}</td>
-	<td>
-		<button type="button"
-			class="btn btn-link"
-			(click)="showAnswer(question)">
-			<i class="	fa fa-info-circle  fa-lg"></i>
-		</button>
-	</td>
-  </tr>
-  </tbody>
-</table>
-				
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Pytanie</th>
+							<th scope="col">Data dodania</th>
+							<th scope="col">Odpowiedź</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let question of selectedQuestionList; index as i">
+							<th scope="row">{{ i + 1 }}</th>
+							<td>
+								{{ question.question }}
+							</td>
+							<td>{{ question.creationTime}}</td>
+							<td>
+								<button type="button" class="btn btn-link" (click)="showAnswer(question)">
+									<i class="	fa fa-info-circle  fa-lg"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
 			</div>
 		</div>
 	</div>
 </div>
-
-								

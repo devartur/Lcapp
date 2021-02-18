@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && addUserQuestionsList()" novalidate class="feedback-form">
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">Nazwa listy</label>
+          <input type="text" id="name" class="form-control" name="name" placeholder="Nazwa listy"
+            [(ngModel)]="model.name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" 
+             required maxlength="255" />
+          <!-- input validation group -->
+          <div *ngIf="f.submitted && name.invalid" class="invalid-input">
+            <!-- individual validation errors -->
+            <div *ngIf="name.errors?.required">Pole jest wymagane</div>
+            <div *ngIf="name.errors?.minlength">Min. 1 znak</div>
+            <div *ngIf="name.errors?.maxlength">Max. 255 znaków</div>
+          </div>
+        </div>
+
+        <!-- description -->
+        <div class="form-group">
+          <label for="description">Opis listy</label>
+          <textarea id="description" class="form-control" name="description" placeholder="Opis listy" rows="5"
+            [(ngModel)]="model.description" #description="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" required minlength="5" required
+            maxlength="4000">
+                  </textarea>
+          <!-- input validation group -->
+          <div *ngIf="f.submitted && description.invalid" class="invalid-input">
+            <!-- individual validation errors -->
+            <div *ngIf="description.errors?.required">Pole jest wymagane</div>
+            <div *ngIf="description.errors?.minlength">Min. 5 znaków</div>
+            <div *ngIf="description.errors?.maxlength">Max. 4000 znaków</div>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-info ">
+          <i class="fa fa-plus"></i>
+          <span> Dodaj</span>
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+

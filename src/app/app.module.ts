@@ -69,6 +69,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserQuestionsComponent } from './all-question/user-questions/user-questions.component';
+import { AddUserQuestionsListComponent } from './user-list/add-user-questions-list/add-user-questions-list.component';
+import { UserQuestionsListComponent } from './user-list/user-questions-list/user-questions-list.component';
+import { UserQuestionsListStatisticsComponent } from './user-list/user-questions-list-statistics/user-questions-list-statistics.component';
 
 
 
@@ -100,7 +103,10 @@ const appRoutes: Routes = [
     LoginComponent,
     CallbackComponent,
     UserListComponent,
-    UserQuestionsComponent
+    UserQuestionsComponent,
+    AddUserQuestionsListComponent,
+    UserQuestionsListComponent,
+    UserQuestionsListStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -169,7 +175,11 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   entryComponents:[
     AnswerComponent,
-    UserQuestionsComponent]
+    UserQuestionsComponent,
+    AddUserQuestionsListComponent,
+    UserQuestionsListComponent,
+    UserQuestionsListStatisticsComponent
+  ]
   
 })
 export class AppModule { }
