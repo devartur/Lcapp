@@ -11,7 +11,7 @@ export interface QuestionWithAddInfo{
 	userNote: string;
     nextAnswerDateTime: Date;
 	firstAnswerDateTime: Date;
-	 markedAsKnowDateTime: Date;
+	markedAsKnowDateTime: Date;
 	isMarkedAsKnow: boolean;
 
 }

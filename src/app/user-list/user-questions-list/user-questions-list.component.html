@@ -1,1 +1,62 @@
-<p>user-questions-list works! o tu {{selectedQuestionsList.description}}</p>
+
+  <p><em>Pytanie: &nbsp; </em>{{question}}</p>
+  <hr>
+  <mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <p><em>Odopwiedź podstawowa</em></p>
+</mat-panel-title>
+</mat-expansion-panel-header>
+<div [innerHTML]="basicAnswer"></div>
+</mat-expansion-panel>
+
+<mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <p><em>Odpowiedź rozszerzona</em></p>
+</mat-panel-title>
+</mat-expansion-panel-header>
+<div [innerHTML]="intermediateAnswer"></div>
+</mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+  (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <p><em>Odpowiedź zaawansowana</em></p>
+</mat-panel-title>
+</mat-expansion-panel-header>
+<div [innerHTML]="advancedAnswer"></div>
+</mat-expansion-panel>
+
+</mat-accordion>
+
+
+
+<div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Statystyki</th>
+          <th scope="col">Nazwa listy</th>
+          <th scope="col">Opis listy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let oneAddInfo of userQuestionsWithAddInfo; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            {{ oneAddInfo.question }}
+          </td>
+          <td>
+            {{ oneAddInfo.userNote }}
+          </td>
+          <td>{{ oneAddInfo.basicAnswer }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
