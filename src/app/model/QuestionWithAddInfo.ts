@@ -1,7 +1,6 @@
 export interface QuestionWithAddInfo{
   
     questionId: string;
-    userId: string;
 	
 	question: string;
 	basicAnswer: string;
@@ -9,9 +8,5 @@ export interface QuestionWithAddInfo{
 	advancedAnswer: string;
 	
 	userNote: string;
-    nextAnswerDateTime: Date;
-	firstAnswerDateTime: Date;
-	markedAsKnowDateTime: Date;
-	isMarkedAsKnow: boolean;
-
 }
+

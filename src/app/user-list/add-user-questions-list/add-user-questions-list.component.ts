@@ -35,7 +35,6 @@ export class AddUserQuestionsListComponent implements OnInit {
     },
     err => {
         alert("Błąd podczas dodawania listy.")
-        console.log(err);
     }
     )
 }

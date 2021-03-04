@@ -22,6 +22,7 @@ export class ApiService {
   private QUESTIONS_LISTS_URL = `${this.BASE_URL}/questions-lists`;
   private SEND_ADD_QUESTIONS_TO_QUESTIONS_LIST_URL = `${this.BASE_URL}/questions-to-questions-lists`;
   private GET_USER_QUESTIONS_WITH_ADD_INFO_URL = `${this.BASE_URL}/user-questions-in-questions-lists`;
+  private UPDATE_QUESTION_WITHADD_INFO_URL = `${this.BASE_URL}/user-questions/`;
   
   constructor(private http: HttpClient) { }
 
@@ -66,7 +67,9 @@ export class ApiService {
     return this.http.get<QuestionWithAddInfo[]>(this.GET_USER_QUESTIONS_WITH_ADD_INFO_URL, { params });
   }
 
-
-
+  
+  updateQuestionWithAddInfo(updateQuestion: Map<string, any>, questionId: string): Observable<any> {
+    return this.http.patch(this.UPDATE_QUESTION_WITHADD_INFO_URL + questionId, Object.fromEntries(updateQuestion));
+  }
 
 }
