@@ -58,6 +58,9 @@ export class UserQuestionsListComponent implements OnInit {
         this.userQuestionsWithAddInfo = res;
         if (typeof this.userQuestionsWithAddInfo !== 'undefined' && this.userQuestionsWithAddInfo.length > 0) {
           this.setDataForQuestion(0);
+        }else{
+          alert("Brak pytań w dniu dzisiejszym dla tej listy.");
+          location.reload();
         }
 
       },
@@ -69,6 +72,8 @@ export class UserQuestionsListComponent implements OnInit {
   }
 
   public setDataForQuestion(number: number) {
+
+    console.log("ustawiam nr: "+this.questionNumber )
 
     this.questionId = this.userQuestionsWithAddInfo[number].questionId;
     this.question = this.userQuestionsWithAddInfo[number].question;
@@ -88,12 +93,17 @@ export class UserQuestionsListComponent implements OnInit {
 
   markAsKnow() {
 
-     
-    if (typeof this.userQuestionsWithAddInfo !== 'undefined' && this.userQuestionsWithAddInfo.length > this.questionNumber) {
+    console.log("this.userQuestionsWithAddInfo.length: "+this.userQuestionsWithAddInfo.length);
+    console.log(" this.questionNumber: "+ this.questionNumber);
+    console.log(" wysyłan numer do aktu: "+ this.questionNumber);
+    if (typeof this.userQuestionsWithAddInfo !== 'undefined' && this.userQuestionsWithAddInfo.length >= this.questionNumber) {
       this.apiService.updateQuestionWithAddInfo(new Map([[ "isMarkedAsKnow", true ]]),this.questionId).subscribe(
         res => {
           if (typeof this.userQuestionsWithAddInfo !== 'undefined' && this.userQuestionsWithAddInfo.length > this.questionNumber) {
             this.setDataForQuestion(this.questionNumber);
+          }else{
+            alert("Koniec pytań dla tej listy na dzisiaj.")
+            location.reload();
           }
         },
         err => {
