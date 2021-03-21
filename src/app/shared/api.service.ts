@@ -7,6 +7,8 @@ import { FeedbackViewModel } from "../feedback/feedback.component";
 import { map } from 'rxjs/operators';
 import { QuestionsList } from '../model/QuestionsList';
 import { QuestionWithAddInfo } from '../model/QuestionWithAddInfo';
+import { QuestionsListStatistics } from '../model/QuestionsListStatistics';
+import { QuestionDataToStatistics } from '../model/QuestionDataToStatistics';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,10 @@ export class ApiService {
   private QUESTIONS_LISTS_URL = `${this.BASE_URL}/questions-lists`;
   private SEND_ADD_QUESTIONS_TO_QUESTIONS_LIST_URL = `${this.BASE_URL}/questions-to-questions-lists`;
   private GET_USER_QUESTIONS_WITH_ADD_INFO_URL = `${this.BASE_URL}/user-questions-in-questions-lists`;
-  private UPDATE_QUESTION_WITHADD_INFO_URL = `${this.BASE_URL}/user-questions/`;
+  private UPDATE_QUESTION_WITH_ADD_INFO_URL = `${this.BASE_URL}/user-questions/`;
+  private GET_QUESTIONS_LIST_STATISTICS_URL = `${this.BASE_URL}/questions-list-statistics`;
+  private GET_QUESTION_DATA_TO_STATISTICS_URL = `${this.BASE_URL}/question-data-to-statistics`;
+
   
   constructor(private http: HttpClient) { }
 
@@ -69,7 +74,25 @@ export class ApiService {
 
   
   updateQuestionWithAddInfo(updateQuestion: Map<string, any>, questionId: string): Observable<any> {
-    return this.http.patch(this.UPDATE_QUESTION_WITHADD_INFO_URL + questionId, Object.fromEntries(updateQuestion));
+    return this.http.patch(this.UPDATE_QUESTION_WITH_ADD_INFO_URL + questionId, Object.fromEntries(updateQuestion));
   }
+  
+  repeatIn(updateQuestion: Map<string, any>, questionId: string): Observable<any> {
+    return this.http.patch(this.UPDATE_QUESTION_WITH_ADD_INFO_URL + questionId, Object.fromEntries(updateQuestion));
+  }
+
+  getQuestionsListStatistics(questionsListId: string): Observable<QuestionsListStatistics> {
+    let params = new HttpParams()
+      .set('questionsListId', questionsListId);
+    return this.http.get<QuestionsListStatistics>(this.GET_QUESTIONS_LIST_STATISTICS_URL, { params });
+  }
+
+  getQuestionDataToStatistics(questionsListId: string): Observable<QuestionDataToStatistics[]> {
+    let params = new HttpParams()
+      .set('questionsListId', questionsListId);
+    return this.http.get<QuestionDataToStatistics[]>(this.GET_QUESTION_DATA_TO_STATISTICS_URL, { params });
+  }
+
+
 
 }

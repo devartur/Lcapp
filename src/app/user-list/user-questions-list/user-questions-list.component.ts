@@ -28,6 +28,7 @@ export class UserQuestionsListComponent implements OnInit {
   question: any;
 
   userNote: string;
+  userNoteToAdd: string;
   nextAnswerDateTime: Date;
   firstAnswerDateTime: Date;
   markedAsKnowDateTime: Date;
@@ -66,14 +67,11 @@ export class UserQuestionsListComponent implements OnInit {
       },
       err => {
         alert("Błąd podczas odbierania danych.(uq_qwai_1)")
-        console.log(err);
       }
     );
   }
 
   public setDataForQuestion(number: number) {
-
-    console.log("ustawiam nr: "+this.questionNumber )
 
     this.questionId = this.userQuestionsWithAddInfo[number].questionId;
     this.question = this.userQuestionsWithAddInfo[number].question;
@@ -86,16 +84,28 @@ export class UserQuestionsListComponent implements OnInit {
     this.questionNumber = this.questionNumber+1;
   }
 
-  repeatIn(event: any) {
+  setRepeatValue(event: any) {
     this.repeatInValue = event.value;
+  }
+
+  repeatIn(){
+    this.apiService.repeatIn(new Map([[ "repeatIn",  this.repeatInValue ]]), this.questionId).subscribe(
+      res => {
+        if (typeof this.userQuestionsWithAddInfo !== 'undefined' && this.userQuestionsWithAddInfo.length > this.questionNumber) {
+          this.setDataForQuestion(this.questionNumber);
+        }else{
+          alert("Koniec pytań dla tej listy na dzisiaj.")
+          location.reload();
+        }
+      },
+      err => {
+        alert("Błąd podczas ustawiania powturki.(uq_ri_1)")
+      }
+    );
   }
 
 
   markAsKnow() {
-
-    console.log("this.userQuestionsWithAddInfo.length: "+this.userQuestionsWithAddInfo.length);
-    console.log(" this.questionNumber: "+ this.questionNumber);
-    console.log(" wysyłan numer do aktu: "+ this.questionNumber);
     if (typeof this.userQuestionsWithAddInfo !== 'undefined' && this.userQuestionsWithAddInfo.length >= this.questionNumber) {
       this.apiService.updateQuestionWithAddInfo(new Map([[ "isMarkedAsKnow", true ]]),this.questionId).subscribe(
         res => {
@@ -114,13 +124,27 @@ export class UserQuestionsListComponent implements OnInit {
     }else{
       alert("Koniec pytań dla tej listy na dzisiaj.")
       location.reload();
-    }
-
-    
+    }  
   }
-
 
   addNote() {
-    console.log("Notatka");
+    
+    this.apiService.updateQuestionWithAddInfo(new Map([[ "addNote",  this.userNoteToAdd ]]),this.questionId).subscribe(
+      res => {
+        if(this.userNote===""){
+          alert("Notatka została dodana.");
+          this.userNote = this.userNoteToAdd;
+        }else{
+          alert("Notatka została zaktualizowana.");
+          this.userNote = this.userNoteToAdd;
+        }
+        
+      },
+      err => {
+        alert("Błąd podczas dodawania notatki.");
+        
+      }
+    );
   }
+
 }

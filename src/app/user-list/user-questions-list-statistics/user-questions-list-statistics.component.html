@@ -1,1 +1,60 @@
-<p>user-questions-list-statistics works!</p>
+<h2 style= "text-align: center;">Statystyki</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <table style="border-collapse: collapse; width: 100%; height: 36px;">
+                <tbody>
+                    <tr style="height: 18px;">
+                        <td style="width: 99.9999%; height: 18px;" colspan="3">
+                            <div>
+                                <div style="text-align: center;"> Liczba pytań w liście: {{ questionsListStatistics?.questionsNumber }}</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 18px;">
+                        <td style="width: 33.3333%; height: 18px; text-align: center;">Oznaczonych wiem: {{ questionsListStatistics?.questionsMarkedAsKnowNumber }}</td>
+                        <td style="width: 33.3333%; height: 18px; text-align: center;">Wszystkich powtórek: {{ questionsListStatistics?.repetitionsNumber }}</td>
+                        <td style="width: 33.3333%; height: 18px; text-align: center;">Powtórek na dziś: {{ questionsListStatistics?.repetitionsTodayNumber }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+
+        <div class="row">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Pytanie</th>
+                  <th scope="col">Data odpowiedzi</th>
+                  <th scope="col">Zmiana decyzji</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let  question of questionDataToStatistics; index as i">
+                  <!--(dblclick)="openUserQuestionsList(question)"-->
+                  <th scope="row">{{ i + 1 }}</th>
+                  
+                  <td> {{ question.question }}</td>
+                  <td> {{ question.questionMarkedAsKnowDate}}</td>
+                  <td>
+                    <button type="buton" class="btn btn-info default" (click)="markAsKnow(question, i) ">
+                      {{ question.isQuestionMarkedAsKnow ==="true" ? "Wiem" : "Nie wiem" }}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+         
+</div>
+        

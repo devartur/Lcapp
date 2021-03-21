@@ -30,32 +30,65 @@
         <div [innerHTML]="advancedAnswer"></div>
       </mat-expansion-panel>
     </mat-accordion>
-
   </div>
 
   <p></p>
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <button type="buton" class="btn btn-info default" (click)="addNote()">
-          <i class="fa fa-sticky-note-o"></i>
-          Notatka
-        </button>
-      </div>
-
-      <div class="col-md-6">
-        <mat-slider (input)="repeatIn($event)"  thumbLabel tickInterval="10" 
-        min="1" max="100" matTooltip="Powtórz za" matTooltipPosition="above"></mat-slider>
-      </div>
-
-      <div class="col-md-3">
         <button type="buton" class="btn btn-info default" (click)="markAsKnow()">
           <i class="	fa fa-check-square-o"></i>
           Wiem
         </button>
       </div>
-
+      <div class="col-md-6">
+        <mat-slider (input)="setRepeatValue($event)" thumbLabel tickInterval="10" min="1" max="100" matTooltip="Powtórz za"
+          matTooltipPosition="above"></mat-slider>
+      </div>
+      <div class="col-md-3">
+        <button type="buton" class="btn btn-info default" (click)="repeatIn()">
+          <i class="	fa fa-history"></i>
+          Powtórz
+        </button>
+      </div>
     </div>
   </div>
 
+  <p></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header >
+          <mat-panel-title >
+           Moja notatka
+          </mat-panel-title>
+         
+        </mat-expansion-panel-header>
+        
+
+        <mat-form-field class="col-md-12 text-center">
+          
+          <textarea matInput placeholder={{userNote}} required maxlength="4000" [(ngModel)]="userNoteToAdd"></textarea>
+          
+
+        </mat-form-field>
+
+        <div class="col-md-12 text-center">
+          <button type="buton" class="btn btn-info default" (click)="addNote()">
+            <i class="fa fa-sticky-note-o"></i>
+            Zapisz
+          </button>
+        </div>
+
+
+      </mat-expansion-panel>
+
+    </div>
+    </div>
+  </div>
 </div>
+
+
+
